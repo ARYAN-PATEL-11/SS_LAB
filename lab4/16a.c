@@ -1,3 +1,14 @@
+/*
+============================================================================
+Name : 16a.c
+Author : Aryan Patel
+Description : 16. Write a program to perform mandatory locking.
+ 			a. Implement write lock
+ 			b. Implement read lock
+           
+Date: 25 Aug, 2023.
+============================================================================
+*/
 #include<unistd.h>
 #include<fcntl.h>
 #include<sys/types.h>

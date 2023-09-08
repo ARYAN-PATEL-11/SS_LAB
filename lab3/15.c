@@ -1,3 +1,11 @@
+/*
+============================================================================
+Name : 15.c
+Author : Aryan Patel 
+Description : 15. Write a program to display the environmental variable of the user (use environ).           
+Date: 24 Aug, 2023.
+============================================================================
+*/
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -17,3 +25,4 @@ int main(){
     }
     return 0;
 }
+

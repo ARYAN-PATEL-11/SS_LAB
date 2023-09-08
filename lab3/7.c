@@ -1,15 +1,21 @@
+/*
+============================================================================
+Name : 7.c
+Author : Aryan Patel
+Description : 7. Write a program to copy file1 into file2 ($cp file1 file2).           
+Date: 18 Aug, 2023.
+============================================================================
+*/
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include<stdio.h>
 #include<unistd.h>
- int main(int argc, char* argv[]){
+int main(int argc, char* argv[]){
 if(argc!=3){
 printf("You are useless!");
 return 0;
 }
-//             printf("%d",argc);
-//             printf("%s",argv[0]);
 int fd_read = open(argv[1],O_RDONLY);
 int fd_write = open(argv[2],O_WRONLY | O_CREAT);
 if(fd_read==-1 || fd_write==-1){
