@@ -8,45 +8,50 @@ Description :
 Date: 3 Oct 2023.
 ============================================================================
 */
-#include<stdio.h>
-#include<unistd.h>
-#include<fcntl.h>
-#include<sys/select.h>
-#include<sys/time.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/select.h>
 
 int main() {
-  char buff[20];
-  
-  int fd = open("myfifo", O_NONBLOCK|O_RDONLY);
-  if(fd==-1){
-    printf("Unable to open file\n");
-    return 1;
-  }
-  
-  fd_set rfds;  
-  FD_ZERO(&rfds);
-  FD_SET(fd, &rfds);
-  struct timeval tv;
-  tv.tv_sec = 10;
-  tv.tv_usec=0;
-  
-  int var = select(fd+1,&rfds,NULL, NULL,&tv);
-  if(var==-1){
-    printf("Error in select");
-    return 1;
-  }    
-  if(var==0)
-    printf("No data available within 10 seconds");
-  else{
-      printf("Data is available now\n");
-      int fd_read = read(fd, buff, sizeof(buff));
-      if(fd_read==-1){
-        perror("returns:");
-        close(fd);
-        return 1;
-      }
-      printf("Received message: %s\n", buff);
-  }
-  close(fd);
-  return 1;
+    const char *fifopath = "22fifo"; 
+    mkfifo(fifopath, 0666);
+    int fd = open(fifopath, O_RDONLY);
+
+    if (fd == -1) {
+        perror("open");
+        exit(EXIT_FAILURE);
+    }
+
+    fd_set read_fds;
+    struct timeval timeout;
+    FD_ZERO(&read_fds);
+    FD_SET(fd, &read_fds);
+
+    timeout.tv_sec = 10;
+    timeout.tv_usec = 0;
+    int selectResult = select(fd + 1, &read_fds, NULL, NULL, &timeout);
+
+    if (selectResult == -1) {
+        perror("select");
+        exit(EXIT_FAILURE);
+    } else if (selectResult == 0) {
+        printf("No data received within 10 seconds.\n");
+    } else {
+        char buff[256];
+        int bytesRead = read(fd, buff, sizeof(buff));
+
+        if (bytesRead == -1) {
+            perror("read");
+            exit(EXIT_FAILURE);
+        }
+
+        printf("Received message: %s\n", buff);
+    }
+
+    close(fd);
+
+    return 0;
 }
