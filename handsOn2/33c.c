@@ -2,7 +2,7 @@
 ============================================================================
 Name : 33s.c
 Author : Aryan Patel
-Description : Write a program to communicate between two machines using socket.
+Description : Write a program to communicate between two machines using socket(client)
 Date: 6 Oct 2023.
 ============================================================================
 */

@@ -4,6 +4,7 @@ Name : 27a.c
 Author : Aryan Patel
 Description : Write a program to receive messages from the message queue.
 		a)with 0 as a flag
+		b)with IPC_NOWAIT as a flag
 Date: 6 Oct 2023.
 ============================================================================
 */
