@@ -1,3 +1,6 @@
+/*
+This file consists of admin credentials
+*/
 #ifndef ADMIN_CREDENTIALS
 #define ADMIN_CREDENTIALS
 
