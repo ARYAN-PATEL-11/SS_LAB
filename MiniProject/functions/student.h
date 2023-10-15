@@ -189,7 +189,7 @@ int drop_course(int connFD){
   lockingStatus = fcntl(courseFileDescriptor, F_SETLK, &lock);   
   close(enrollFileDescriptor);
 
-  // change status to enrolled
+  // change status to unenrolled
   strcpy(enroll.status,"unenrolled");
   
   //updating record
